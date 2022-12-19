@@ -1,6 +1,8 @@
 import socket
 import subprocess
 
+import re
+
 # Get IP
 def get_ip(url):
   try:
@@ -20,16 +22,18 @@ def run_subprocess(command):
 
 # Main function
 def main():
-  url = "www.testdevlab.com"
+  url = "www.URL.com"
   ip = get_ip(url)
   
   print(f"The IP address of {url} is {ip}")
 
   # List of commands to run
   commands = [
-      ["nikto", "-h", ip],
+
+      # Need to figure out how tu make output file to add IP dinamicly
+      ["nikto", "-h", ip, "-o", "nikto-output.txt"],
       # Next one, need to think best way to use IP more dinamicly
-      ["gobuster", "dir", "-u", "http://159.223.1.24", "-w", "usr/share/seclists/Discover/Web-Content/common.txt"],
+      ["gobuster", "dir", "-u", "http://IP", "-w", "usr/share/seclists/Discover/Web-Content/common.txt"],
       ["nmap", "-sV", "-p-", "-v", ip]
   ]
 
@@ -39,6 +43,16 @@ def main():
       print(f"Running {command[0]} scan...")
       print("============================================")
       run_subprocess(command)
+
+### Using Re-gex and grom TXT file we extract ports and save them in separated one
+
+# # Extract port numbers from the nmap output
+# port_numbers = re.findall(r"\d+/\w+", nmap_output)
+
+# # Write the port numbers to a new file
+# with open("nmap-ports.txt", "w") as f:
+#   for port in port_numbers:
+#     f.write(port + "\n")
 
   # Main function
 if __name__ == "__main__":
