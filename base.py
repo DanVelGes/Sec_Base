@@ -1,7 +1,6 @@
 import socket
 import subprocess
-
-import re
+import re #for Regex
 
 # Get IP
 def get_ip(url):
