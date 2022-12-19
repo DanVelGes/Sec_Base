@@ -27,16 +27,19 @@ def main():
 
   # List of commands to run
   commands = [
-      ["nmap", "-sV", "-p-", "-v", ip],
       ["nikto", "-h", ip],
-      ["dirbuster", "-u", ip]
+      # Next one, need to think best way to use IP more dinamicly
+      ["gobuster", "dir", "-u", "http://159.223.1.24", "-w", "usr/share/seclists/Discover/Web-Content/common.txt"],
+      ["nmap", "-sV", "-p-", "-v", ip]
   ]
 
   # Run each command
   for command in commands:
+      print("============================================")
       print(f"Running {command[0]} scan...")
+      print("============================================")
       run_subprocess(command)
 
-# Main function
+  # Main function
 if __name__ == "__main__":
   main()
