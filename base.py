@@ -1,7 +1,12 @@
 import socket
 import subprocess
+<<<<<<< HEAD
+import re
+
+=======
 import re #for Regex
 
+>>>>>>> 52d5c2ccf75e212b08114be4821e0833723d2528
 # Get IP
 def get_ip(url):
   try:
